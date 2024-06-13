@@ -14,21 +14,21 @@ function trauncate(username: string) {
 const app = express();
 const PORT = 3001;
 
+app.use(
+    cors({
+        origin: '*',
+        methods: ['GET', 'OPTIONS'],
+    })
+);
+
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'static')));
 
 app.use(
     morgan('combined', {
-        stream: fs.createWriteStream(path.join(__dirname, '../logs/access.log'), {
+        stream: fs.createWriteStream(path.join(__dirname, 'logs/access.log'), {
             flags: 'a',
         }),
-    })
-);
-
-app.use(
-    cors({
-        origin: '*',
-        methods: ['GET'],
     })
 );
 
@@ -66,6 +66,7 @@ app.get('/nft/:username', async function (req: Request, res: Response) {
     content = content.replace(/<text.*?<\/text>/s, ele);
     content = content.replace('BG_COLOR', BG_COLOR);
 
+    res.set('Cross-Origin-Resource-Policy', 'cross-origin');
     res.set('Content-Type', 'image/svg+xml');
     res.send(content);
 });
