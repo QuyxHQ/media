@@ -5,6 +5,7 @@ import path from 'path';
 import cors from 'cors';
 import fs from 'fs';
 import morgan from 'morgan';
+import { createCanvas, loadImage } from 'canvas';
 
 function trauncate(username: string) {
     if (username.length <= 17) return username;
@@ -66,9 +67,18 @@ app.get('/nft/:username', async function (req: Request, res: Response) {
     content = content.replace(/<text.*?<\/text>/s, ele);
     content = content.replace('BG_COLOR', BG_COLOR);
 
-    res.set('Cross-Origin-Resource-Policy', 'cross-origin');
-    res.set('Content-Type', 'image/svg+xml');
-    res.send(content);
+    const canvas = createCanvas(540, 540);
+    const ctx = canvas.getContext('2d');
+
+    const image = await loadImage(
+        `data:image/svg+xml;base64,${Buffer.from(content).toString('base64')}`
+    );
+
+    ctx.drawImage(image, 0, 0);
+    const buffer = canvas.toBuffer('image/png');
+
+    res.set('Content-Type', 'image/png');
+    res.send(buffer);
 });
 
 const httpServer = http.createServer(app);
