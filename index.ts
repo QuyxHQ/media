@@ -77,6 +77,7 @@ app.get('/nft/:username', async function (req: Request, res: Response) {
     ctx.drawImage(image, 0, 0);
     const buffer = canvas.toBuffer('image/png');
 
+    res.set('Cross-Origin-Resource-Policy', 'cross-origin');
     res.set('Content-Type', 'image/png');
     res.send(buffer);
 });
