@@ -29,12 +29,12 @@
         <style bx:fonts="Montserrat Alternates">@import url(https://fonts.googleapis.com/css2?family=Montserrat+Alternates%3Aital%2Cwght%400%2C100%3B0%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B0%2C900%3B1%2C100%3B1%2C200%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800%3B1%2C900&amp;display=swap);</style>
     </defs>
     <rect x="-0.19" y="-0.493" width="501.066" height="500.267" style="stroke: rgb(0, 0, 0); stroke-width: 0px;"/>
-    <g transform="matrix(1, 0, 0, 1, 57.87114715576172, 9.002908706665039)">
+    <g transform="matrix(1, 0, 0, 1, 57.87114715576166, 9.002908706665039)">
         <g filter="url(#filter0_f_703_729)" transform="matrix(0.780296, 0, 0, 0.780296, 33.87611, -81.614212)" style="">
-            <circle cx="190.951" cy="414.8" r="214.2" fill="url(#paint0_linear_703_729)"/>
+            <circle cx="190.951" cy="414.8" r="214.2" fill="url(#paint0_linear_703_729)" style="fill-opacity: 0.45;"/>
         </g>
         <g filter="url(#filter1_f_703_729)" transform="matrix(0.780296, 0, 0, 0.780296, 33.87611, -81.614212)" style="">
-            <circle cx="264.615" cy="331.732" r="156.732" fill="url(#paint1_linear_703_729)"/>
+            <circle cx="264.615" cy="331.732" r="156.732" fill="url(#paint1_linear_703_729)" style="fill-opacity: 0.45;"/>
         </g>
     </g>
     <g transform="matrix(1.896136999130249, 0, 0, 1.896136999130249, -296.5963439941406, -383.4167175292969)" style="">
