@@ -5,8 +5,10 @@ import path from 'path';
 import cors from 'cors';
 import fs from 'fs';
 import morgan from 'morgan';
-// import { createCanvas, loadImage } from 'canvas';
-import sharp from 'sharp';
+import { createCanvas, loadImage } from 'canvas';
+import NodeCache from 'node-cache';
+
+const cache = new NodeCache({ stdTTL: 0 });
 
 function trauncate(username: string) {
     if (username.length <= 36) return username;
@@ -42,6 +44,16 @@ app.get('/nft/:username', async function (req: Request, res: Response) {
     const len = username.length - 3;
     if (len < 1) return res.sendStatus(400);
 
+    const key = `nft_${username}`;
+    const cachedBuffer = cache.get<Buffer>(key);
+
+    if (cachedBuffer) {
+        res.set('Cross-Origin-Resource-Policy', 'cross-origin');
+        res.set('Content-Type', 'image/png');
+
+        return res.send(cachedBuffer);
+    }
+
     username = trauncate(username);
 
     const file = 'main.svg';
@@ -49,24 +61,21 @@ app.get('/nft/:username', async function (req: Request, res: Response) {
     content = content.replace('[[USERNAME]]', username);
     content = content.replace('[[LENGTH]]', String(len + 3));
 
-    // const canvas = createCanvas(500, 499);
-    // const ctx = canvas.getContext('2d');
+    const canvas = createCanvas(500, 499);
+    const ctx = canvas.getContext('2d');
 
-    // const image = await loadImage(
-    //     `data:image/svg+xml;base64,${Buffer.from(content).toString('base64')}`
-    // );
+    const image = await loadImage(
+        `data:image/svg+xml;base64,${Buffer.from(content).toString('base64')}`
+    );
 
-    // ctx.drawImage(image, 0, 0);
-    // const buffer = canvas.toBuffer('image/png');
+    ctx.drawImage(image, 0, 0);
+    const buffer = canvas.toBuffer('image/png');
 
-    // res.set('Cross-Origin-Resource-Policy', 'cross-origin');
-    // res.set('Content-Type', 'image/png');
-    // res.send(buffer);
-    const imageBuffer = await sharp(Buffer.from(content)).resize(500, 498).png().toBuffer();
+    cache.set(key, buffer);
 
     res.set('Cross-Origin-Resource-Policy', 'cross-origin');
     res.set('Content-Type', 'image/png');
-    res.send(imageBuffer);
+    res.send(buffer);
 });
 
 const httpServer = http.createServer(app);
