@@ -5,11 +5,12 @@ import path from 'path';
 import cors from 'cors';
 import fs from 'fs';
 import morgan from 'morgan';
-import { createCanvas, loadImage } from 'canvas';
+// import { createCanvas, loadImage } from 'canvas';
+import sharp from 'sharp';
 
 function trauncate(username: string) {
-    if (username.length <= 17) return username;
-    return `${username.slice(0, 10)}....${username.slice(-6)}`;
+    if (username.length <= 36) return username;
+    return `${username.slice(0, 20)}....${username.slice(-13)}`;
 }
 
 const app = express();
@@ -41,45 +42,31 @@ app.get('/nft/:username', async function (req: Request, res: Response) {
     const len = username.length - 3;
     if (len < 1) return res.sendStatus(400);
 
-    const BG_COLOR =
-        username.length == 4
-            ? '#EFF2F8'
-            : username.length == 5
-            ? '#FCEDED'
-            : username.length == 6
-            ? '#F2FCED'
-            : username.length == 7
-            ? '#EDFCFB'
-            : username.length == 8
-            ? '#EFEDFC'
-            : username.length == 9
-            ? '#D1CDF3'
-            : username.length == 10
-            ? '#EDF3CD'
-            : '#E9D2E6';
-
     username = trauncate(username);
 
     const file = 'main.svg';
     let content = fs.readFileSync(path.join(__dirname, 'svg', file), 'utf8');
+    content = content.replace('[[USERNAME]]', username);
+    content = content.replace('[[LENGTH]]', String(len + 3));
 
-    const ele = `<text dx="0" dy="0" font-family="&quot;eDqPEmTwIRa1:::Montserrat Alternates&quot;" font-size="28" font-weight="500" transform="translate(112.86081 456.69521)" stroke-width="0" textLength="323" lengthAdjust="spacingAndGlyphs"><tspan y="0" font-weight="500" stroke-width="0"><![CDATA[@${username}]]></tspan><tspan x="0" y="28" font-weight="500" stroke-width="0"><![CDATA[ ]]></tspan></text>`;
-    content = content.replace(/<text.*?<\/text>/s, ele);
-    content = content.replace('BG_COLOR', BG_COLOR);
+    // const canvas = createCanvas(500, 499);
+    // const ctx = canvas.getContext('2d');
 
-    const canvas = createCanvas(540, 540);
-    const ctx = canvas.getContext('2d');
+    // const image = await loadImage(
+    //     `data:image/svg+xml;base64,${Buffer.from(content).toString('base64')}`
+    // );
 
-    const image = await loadImage(
-        `data:image/svg+xml;base64,${Buffer.from(content).toString('base64')}`
-    );
+    // ctx.drawImage(image, 0, 0);
+    // const buffer = canvas.toBuffer('image/png');
 
-    ctx.drawImage(image, 0, 0);
-    const buffer = canvas.toBuffer('image/png');
+    // res.set('Cross-Origin-Resource-Policy', 'cross-origin');
+    // res.set('Content-Type', 'image/png');
+    // res.send(buffer);
+    const imageBuffer = await sharp(Buffer.from(content)).resize(500, 498).png().toBuffer();
 
     res.set('Cross-Origin-Resource-Policy', 'cross-origin');
     res.set('Content-Type', 'image/png');
-    res.send(buffer);
+    res.send(imageBuffer);
 });
 
 const httpServer = http.createServer(app);
