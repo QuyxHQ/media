@@ -1,27 +1,32 @@
 {
-  "name": "nextjs",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "canvas": "^2.11.2",
-    "next": "14.2.4",
-    "react": "^18",
-    "react-dom": "^18"
-  },
-  "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.4",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5"
-  }
+    "name": "quyx",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build": "rm -rf build/ && tsc && mkdir build/logs && npm run copy",
+        "copy": "copyfiles -u 1 static/**/* build/static && copyfiles -u 1 svg/**/* build/svg",
+        "start": "node build/index.js",
+        "dev": "ts-node-dev --respawn --transpile-only index.ts"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "canvas": "^2.11.2",
+        "cors": "^2.8.5",
+        "express": "^4.19.2",
+        "helmet": "^7.1.0",
+        "morgan": "^1.10.0",
+        "node-cache": "^5.1.2",
+        "typescript": "^5.4.5"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.17",
+        "@types/express": "^4.17.21",
+        "@types/morgan": "^1.9.9",
+        "@types/node": "^20.14.2",
+        "copyfiles": "^2.4.1",
+        "ts-node-dev": "^2.0.0"
+    }
 }
