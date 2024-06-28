@@ -26,7 +26,6 @@ const svg = `
                 <stop stop-color="#9327FF"/>
                 <stop offset="1" stop-color="#FFA927"/>
             </linearGradient>
-            <style bx:fonts="Montserrat Alternates">@import url(https://fonts.googleapis.com/css2?family=Montserrat+Alternates%3Aital%2Cwght%400%2C100%3B0%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B0%2C900%3B1%2C100%3B1%2C200%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800%3B1%2C900&amp;display=swap);</style>
         </defs>
         <rect x="-0.19" y="-0.493" width="501.066" height="500.267" style="stroke: rgb(0, 0, 0); stroke-width: 0px;"/>
         <g transform="matrix(1, 0, 0, 1, 57.87114715576166, 9.002908706665039)">
@@ -45,10 +44,10 @@ const svg = `
         </g>
         <path style="fill: rgb(216, 216, 216); stroke: rgb(255, 255, 255); transform-origin: 249.999px 278.888px;" d="M 39.936 280.519 L 460.063 277.257" transform="matrix(1, 0, 0, 1, 0, 119.406784057621)"/>
         <path style="fill: rgb(216, 216, 216); stroke: rgb(255, 255, 255); transform-origin: 249.999px 278.888px;" d="M 39.936 280.519 L 460.063 277.257"/>
-        <text style="fill: rgba(255, 255, 255, 0.663); font-family: 'Montserrat Alternates'; font-weight: 500; white-space: pre; font-size: 15px;" x="60.504" y="270.281">USERNAME</text>
-        <text style="fill: rgba(255, 255, 255, 0.663); font-family: 'Montserrat Alternates'; font-weight: 500; white-space: pre; font-size: 15px;" x="60.504" y="387.557">LENGTH</text>
-        <text style="fill: rgb(255, 255, 255); font-family: 'Montserrat Alternates'; font-size: 16px; font-weight: 600; white-space: pre;" x="61.306" y="306.677">[[USERNAME]]</text>
-        <text style="fill: rgb(255, 255, 255); font-family: 'Montserrat Alternates'; font-size: 16px; font-weight: 600; white-space: pre;" x="64.168" y="423.354">[[LENGTH]]</text>
+        <text style="fill: rgba(255, 255, 255, 0.663);font-weight: 500; white-space: pre; font-size: 15px;" x="60.504" y="270.281">USERNAME</text>
+        <text style="fill: rgba(255, 255, 255, 0.663);font-weight: 500; white-space: pre; font-size: 15px;" x="60.504" y="387.557">LENGTH</text>
+        <text style="fill: rgb(255, 255, 255);font-size: 16px; font-weight: 600; white-space: pre;" x="61.306" y="306.677">[[USERNAME]]</text>
+        <text style="fill: rgb(255, 255, 255);font-size: 16px; font-weight: 600; white-space: pre;" x="64.168" y="423.354">[[LENGTH]]</text>
         <path style="fill: rgb(255, 255, 255); stroke: rgb(255, 255, 255);" d="M 406.089 217.591 L 407.732 460.22"/>
     </svg>
 `;
